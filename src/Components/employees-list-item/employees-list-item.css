@@ -1,0 +1,65 @@
+.employees-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.employees-list-name {
+  line-height: 35px;
+  font-size: 20px;
+  cursor: pointer;
+  min-width: 550px;
+}
+
+.employees-list input {
+  line-height: 35px;
+  font-size: 20px;
+  text-align: center;
+  border: 0;
+  outline-style: none;
+}
+
+.employees-list button {
+  width: 35px;
+  height: 35px;
+  margin: 3px;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.employees-list-btn-cookie {
+  color: #e09f3e;
+}
+
+.employees-list-btn-trash {
+  color: #e5383b;
+}
+
+.fas.fa-star {
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  line-height: 35px;
+  font-size: 16px;
+  color: #ffd700;
+  transition: 0.3s all;
+  transform: translateX(30px);
+  opacity: 0;
+}
+
+.employees-list-item.like .fas.fa-star {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+.employees-list-item.increase .employees-list-name,
+.employees-list-item.increase .employees-list-input {
+  color: #e09f3e;
+}
+
+.employees-list-item.increase .employees-list-btn-star {
+  color: #aeaeae;
+}
