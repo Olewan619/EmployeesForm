@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cad4e1ed;
 }
 
 .employees-list-name {
@@ -50,16 +50,16 @@
   opacity: 0;
 }
 
-.employees-list-item.like .fas.fa-star {
-  opacity: 1;
-  transform: translateX(0px);
-}
-
-.employees-list-item.increase .employees-list-name,
-.employees-list-item.increase .employees-list-input {
+.employees-list.increase .employees-list-name,
+.employees-list.increase .employees-list-input {
   color: #e09f3e;
 }
 
-.employees-list-item.increase .employees-list-btn-star {
+.employees-list.increase .employees-list-btn-star {
   color: #aeaeae;
+}
+
+.employees-list.like .fas.fa-star {
+  opacity: 1;
+  transform: translateX(0px);
 }
