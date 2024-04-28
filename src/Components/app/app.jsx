@@ -16,6 +16,7 @@ class App extends Component {
         { name: "Carl W.", salary: 5000, increase: false, rise: false, id: 3 },
       ],
       term: "",
+      filter: "rise",
       // Добавим ключ key для компонента AppInfo
       appInfoKey: 0,
     };
@@ -104,11 +105,28 @@ class App extends Component {
     this.setState({ term: term });
   };
 
+  filterPost = (items, filter) => {
+    switch (filter) {
+      case "increase":
+        return items.filter((item) => item.increase);
+      case "rise":
+        return items.filter((item) => item.rise);
+      case "over1000":
+        return items.filter((item) => item.salary > 1000);
+      default:
+        return items;
+    }
+  };
+
+  onFilterChange = (filter) => {
+    this.setState({ filter: filter });
+  };
+
   render() {
-    const { data, term, appInfoKey } = this.state;
+    const { data, term, appInfoKey, filter } = this.state;
     const employees = data.length;
     const bonus = data.filter((item) => item.increase).length;
-    const visibleData = this.searchEmp(data, term);
+    const visibleData = this.filterPost(this.searchEmp(data, term), filter);
 
     return (
       <div className="app">
@@ -116,7 +134,7 @@ class App extends Component {
         <AppInfo key={appInfoKey} employees={employees} bonus={bonus} />
         <div className="search-panel">
           <SearchPanel onUpdateSearch={this.onUpdateSearch} />
-          <AppFilter />
+          <AppFilter filter={filter} onFilterChange={this.onFilterChange} />
         </div>
         <EmployeesList
           data={visibleData}
