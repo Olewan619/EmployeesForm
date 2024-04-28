@@ -15,6 +15,7 @@ class App extends Component {
         { name: "Alex M.", salary: 3000, increase: true, rise: false, id: 2 },
         { name: "Carl W.", salary: 5000, increase: false, rise: false, id: 3 },
       ],
+      term: "",
       // Добавим ключ key для компонента AppInfo
       appInfoKey: 0,
     };
@@ -45,7 +46,7 @@ class App extends Component {
         message += "- Имя должно содержать не менее трех символов.\n";
       }
       if (salary <= 0) {
-        message += "- Зарплата должна быть меньше нуля.\n";
+        message += "- Зарплата должна быть не меньше нуля.\n";
       }
       alert(message);
       return;
@@ -89,24 +90,36 @@ class App extends Component {
     });
   };
 
+  searchEmp = (items, term) => {
+    if (term.length === 0) {
+      return items;
+    }
+    term = term.toLowerCase(); //
+    return items.filter((item) => {
+      return item.name.toLowerCase().indexOf(term) > -1;
+    });
+  };
+
+  onUpdateSearch = (term) => {
+    this.setState({ term: term });
+  };
+
   render() {
-    const employees = this.state.data.length;
-    const bonus = this.state.data.filter((item) => item.increase).length;
+    const { data, term, appInfoKey } = this.state;
+    const employees = data.length;
+    const bonus = data.filter((item) => item.increase).length;
+    const visibleData = this.searchEmp(data, term);
 
     return (
       <div className="app">
         {/* Используем ключ key для компонента AppInfo */}
-        <AppInfo
-          key={this.state.appInfoKey}
-          employees={employees}
-          bonus={bonus}
-        />
+        <AppInfo key={appInfoKey} employees={employees} bonus={bonus} />
         <div className="search-panel">
-          <SearchPanel />
+          <SearchPanel onUpdateSearch={this.onUpdateSearch} />
           <AppFilter />
         </div>
         <EmployeesList
-          data={this.state.data}
+          data={visibleData}
           onDelete={this.deleteItem}
           onToggleProp={this.onToggleProp}
         />
