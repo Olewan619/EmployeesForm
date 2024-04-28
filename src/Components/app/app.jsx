@@ -16,7 +16,7 @@ class App extends Component {
         { name: "Carl W.", salary: 5000, increase: false, rise: false, id: 3 },
       ],
       term: "",
-      filter: "rise",
+      filter: "all",
       // Добавим ключ key для компонента AppInfo
       appInfoKey: 0,
     };
@@ -122,6 +122,17 @@ class App extends Component {
     this.setState({ filter: filter });
   };
 
+  onChangeSalary = (id, salary) => {
+    this.setState(({ data }) => ({
+      data: data.map((item) => {
+        if (item.id === id) {
+          return { ...item, salary };
+        }
+        return item;
+      }),
+    }));
+  };
+
   render() {
     const { data, term, appInfoKey, filter } = this.state;
     const employees = data.length;
@@ -140,6 +151,7 @@ class App extends Component {
           data={visibleData}
           onDelete={this.deleteItem}
           onToggleProp={this.onToggleProp}
+          onChangeSalary={this.onChangeSalary}
         />
         <EmployeesAddForm onAdd={this.addItemForm} />
       </div>

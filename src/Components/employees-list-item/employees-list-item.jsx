@@ -1,7 +1,15 @@
 import "./employees-list-item.css";
 
 const EmployeesListItem = (props) => {
-  const { name, salary, onDelete, onToggleProp, increase, rise } = props;
+  const {
+    name,
+    salary,
+    onDelete,
+    onToggleProp,
+    increase,
+    rise,
+    onChangeSalary,
+  } = props;
 
   let employeesPrem = "employees-list";
   if (increase) {
@@ -21,6 +29,7 @@ const EmployeesListItem = (props) => {
         className="employees-list-input"
         type="text"
         defaultValue={salary + "$"}
+        onChange={onChangeSalary}
       ></input>
       <div>
         <button
